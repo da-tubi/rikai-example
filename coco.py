@@ -62,5 +62,5 @@ images_df.printSchema()
    .write
    .format("rikai")
    .mode("overwrite")
-   .save("/tmp/rikai-example/coco")
+   .save("/tmp/rikai_example/coco")
 )
