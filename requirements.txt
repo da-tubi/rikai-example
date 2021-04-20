@@ -31,6 +31,9 @@ requests==2.25.1
 rikai==0.0.7
 semver==2.13.0
 six==1.15.0
+torch==1.8.1
+torchvision==0.9.1
 traitlets==5.0.5
+typing-extensions==3.7.4.3
 urllib3==1.26.4
 wcwidth==0.2.5
