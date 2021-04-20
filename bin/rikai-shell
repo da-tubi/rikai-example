@@ -1,5 +1,5 @@
 pyspark \
-  --conf spark.jars.packages=ai.eto:rikai_2.12:0.0.6 \
+  --conf spark.jars.packages=ai.eto:rikai_2.12:0.0.7 \
   --conf spark.sql.extensions=ai.eto.rikai.sql.spark.RikaiSparkSessionExtensions \
   --conf rikai.sql.ml.catalog.impl=ai.eto.rikai.sql.model.SimpleCatalog \
   --conf rikai.sql.ml.registry.file.impl=ai.eto.rikai.sql.model.fs.FileSystemRegistry
