@@ -4,7 +4,7 @@ import subprocess
 
 model_path = "/tmp/model/resnet50.pt"
 
-# Download Coco Sample Dataset from Fast.ai datasets
+# Download pre-trained resnet model
 if not os.path.exists(model_path):
     subprocess.check_call(f"wget https://download.pytorch.org/models/resnet50-19c8e357.pth -O {model_path}", shell=True)
 else:
