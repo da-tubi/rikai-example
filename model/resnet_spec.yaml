@@ -1,7 +1,7 @@
 version: "1.0"
 name: resnet
 model:
-  uri: /tmp/model/resnet50.pt
+  uri: /tmp/model/fasterrcnn_resnet50_fpn.pt
   flavor: pytorch
 schema: STRUCT<boxes:ARRAY<ARRAY<float>>, scores:ARRAY<float>, labels:ARRAY<int>>
 transforms:

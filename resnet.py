@@ -1,16 +1,15 @@
 import rikai
 import pathlib
 import subprocess
+import torchvision
+import torch
 
-model_path = "/tmp/model/resnet50.pt"
-
-# Download pre-trained resnet model
-# Here is where I found the pretrained model:
-# https://github.com/pytorch/vision/blob/8fb5838ca916fd4ace080dae0357e7c307037bef/torchvision/models/detection/faster_rcnn.py#L291
-if not os.path.exists(model_path):
-    subprocess.check_call(f"wget https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth -O {model_path}", shell=True)
-else:
-    print("Model already downloaded...")
+resnet = torchvision.models.detection.fasterrcnn_resnet50_fpn(
+    pretrained=True,
+    progress=False,
+)
+model_uri = "/tmp/model/fasterrcnn_resnet50_fpn.pt"
+torch.save(resnet, model_uri)
 
 rikai.spark.sql.init(spark)
 
@@ -18,7 +17,8 @@ work_dir = pathlib.Path().absolute()
 
 spark.sql(f"""
 create model resnet_m
-USING '{work_dir}/model/resnet_spec.yaml'
+options (device="cpu")
+using '{work_dir}/model/resnet_spec.yaml'
 """)
 
 result = spark.sql(f"""
