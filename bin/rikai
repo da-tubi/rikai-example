@@ -1,4 +1,0 @@
-#!/bin/bash
-echo "PYTHONSTARTUP=$1 pyspark --conf spark.jars.packages=ai.eto:rikai_2.12:0.0.7 --conf spark.sql.extensions=ai.eto.rikai.sql.spark.RikaiSparkSessionExtensions"
-
-PYTHONSTARTUP=$1 pyspark --conf spark.jars.packages=ai.eto:rikai_2.12:0.0.7 --conf spark.sql.extensions=ai.eto.rikai.sql.spark.RikaiSparkSessionExtensions

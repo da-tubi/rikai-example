@@ -2,6 +2,7 @@ import os
 import subprocess
 import pyspark.sql.functions as F
 import json
+from example import spark
 from rikai.spark.functions import image, box2d_from_top_left
 from pyspark.sql.functions import col, lit, concat, udf
 
@@ -64,3 +65,4 @@ images_df.printSchema()
    .mode("overwrite")
    .save("/tmp/rikai_example/coco")
 )
+

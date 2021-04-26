@@ -3,6 +3,7 @@ from pyspark.ml.linalg import DenseMatrix
 from rikai.types import Image, Box2d
 from rikai.numpy import wrap
 import numpy as np
+from example import spark
 
 df = spark.createDataFrame(
     [

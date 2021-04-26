@@ -1,17 +1,17 @@
-import rikai
 import pathlib
-import subprocess
 import torchvision
 import torch
+import os
+from example import spark
 
 resnet = torchvision.models.detection.fasterrcnn_resnet50_fpn(
     pretrained=True,
     progress=False,
 )
-model_uri = "/tmp/model/fasterrcnn_resnet50_fpn.pt"
+model_uri = '/tmp/model/fasterrcnn_resnet50_fpn.pt'
+if not pathlib.Path.exists(pathlib.Path('/tmp/model')):
+    os.mkdir("/tmp/model")
 torch.save(resnet, model_uri)
-
-rikai.spark.sql.init(spark)
 
 work_dir = pathlib.Path().absolute()
 
@@ -26,4 +26,4 @@ select ML_PREDICT(resnet_m, '{work_dir}/img/lena.png')
 """)
 
 result.printSchema()
-result.show()
+result.show(1, vertical=False, truncate=False)
