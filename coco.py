@@ -3,7 +3,7 @@ import subprocess
 import pyspark.sql.functions as F
 import json
 from example import spark
-from rikai.spark.functions import image, box2d_from_top_left
+from rikai.spark.functions import to_image, box2d_from_top_left
 from pyspark.sql.functions import col, lit, concat, udf
 
 coco_sample_path = "../coco_sample"
@@ -50,7 +50,7 @@ images_df = spark \
     .createDataFrame(spark.sparkContext.parallelize(coco["images"])) \
     .withColumn(
         "image", 
-        image(concat(lit("coco_sample/train_sample/"), col("file_name")))
+        to_image(concat(lit("coco_sample/train_sample/"), col("file_name")))
     )
 images_df = images_df.join(annotations_df, images_df.id == annotations_df.image_id) \
     .drop("annotations_df.image_id", "file_name", "id")

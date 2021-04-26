@@ -1,6 +1,5 @@
 # Rikai Examples
 ## Scripts
-+ `bin/rikai`: runner, eg. `bin/rikai coco.py`
 + `bin/rikai-shell`: REPL, eg. `bin/rikai-shell`
 
 ## Convention
@@ -11,8 +10,9 @@ Use `/tmp/rikai_example` as rikai warehouse, for `xyz.py`, save rikai formatted 
 $ conda create --no-default-packages -n rikai-example python=3.8 --yes
 $ conda activate rikai-example
 $ pip install -r requirements.txt
-$ bin/rikai coco.py
-$ bin/rikai-shell
+$ python coco.py
+$ python
+>>> from example import spark
 >>> df = spark.read.format("rikai").load("/tmp/rikai_example/coco")
 >>> df.show(1, truncate=False, vertical=True)
 -RECORD 0---------------------------------------------------------------------------------------------------------------------------------------------------------------------
