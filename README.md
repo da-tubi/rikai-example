@@ -18,3 +18,10 @@ $ python
  annotations | [{Box2d(xmin=135.0, ymin=13.05, xmax=230.55, ymax=36.379999999999995), book, 84}, {Box2d(xmin=325.53, ymin=0.0, xmax=362.53999999999996, ymax=40.62), tv, 72}]
 only showing top 1 row
 ```
+
+## Table of contents
++ coco.py: prepare the coco dataset
++ example_write.py: an example for rikai format writing
++ resnet.py: create the pre-trained resnet model and then run ML_PREDICT
++ sql_show_models.py: Example of `show models`
+
