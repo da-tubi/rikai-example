@@ -23,5 +23,6 @@ only showing top 1 row
 + coco.py: prepare the coco dataset
 + example_write.py: an example for rikai format writing
 + resnet.py: create the pre-trained resnet model and then run ML_PREDICT
++ resnet_mlflow.py: register the pre-trained resnet model and then create and then run ML_PREDICT
 + sql_show_models.py: Example of `show models`
 
