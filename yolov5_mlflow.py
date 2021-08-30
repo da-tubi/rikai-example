@@ -42,7 +42,7 @@ with mlflow.start_run():
     ####
     spark.conf.set("rikai.sql.ml.registry.mlflow.tracking_uri", mlflow_tracking_uri)
     spark.sql(f"""
-    CREATE MODEL mlflow_yolov5_m USING 'mlflow:///{registered_model_name}';
+    CREATE MODEL mlflow_yolov5_m OPTIONS (device='gpu') USING 'mlflow:///{registered_model_name}';
     """)
 
     ####
