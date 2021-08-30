@@ -6,6 +6,7 @@ import pathlib
 import mlflow
 import rikai
 import yolov5
+import torch
 from rikai.contrib.torch.transforms.yolov5 import OUTPUT_SCHEMA
 
 from example import spark
@@ -40,9 +41,16 @@ with mlflow.start_run():
     ####
     # Part 2: create the model using the registered MLflow uri
     ####
+    if torch.cuda.is_available():
+        print("Using GPU\n")
+        device = 'gpu'
+    else:
+        print("Using CPU\n")
+        device = 'cpu'
+
     spark.conf.set("rikai.sql.ml.registry.mlflow.tracking_uri", mlflow_tracking_uri)
     spark.sql(f"""
-    CREATE MODEL mlflow_yolov5_m OPTIONS (device='gpu') USING 'mlflow:///{registered_model_name}';
+    CREATE MODEL mlflow_yolov5_m OPTIONS (device='{device}') USING 'mlflow:///{registered_model_name}';
     """)
 
     ####
