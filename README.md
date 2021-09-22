@@ -25,4 +25,5 @@ only showing top 1 row
 + resnet.py: create the pre-trained resnet model and then run ML_PREDICT
 + resnet_mlflow.py: register the pre-trained resnet model and then create and then run ML_PREDICT
 + sql_show_models.py: Example of `show models`
++ yolov5_mlflow.py: register the pre-trained yolov5 model and then create and then run ML_PREDICT
 
