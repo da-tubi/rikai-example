@@ -28,7 +28,7 @@ with mlflow.start_run() as run:
     model.fit(X, y)
     metrics = mlflow.sklearn.eval_and_log_metrics(model, X_eval, y_eval, prefix="val_")
 
-    schema = "array<float>"
+    schema = "float"
     registered_model_name = f"{getpass.getuser()}_sklearn_lr"
     rikai.mlflow.sklearn.log_model(
         model,
@@ -51,9 +51,12 @@ with mlflow.start_run() as run:
     ####
     spark.sql("show models").show(1, vertical=False, truncate=False)
 
+    df = spark.range(100).selectExpr("id as x0", "id+1 as x1")
+    df.createOrReplaceTempView("tbl_X")
+
     result = spark.sql(f"""
-    select ML_PREDICT(mlflow_sklearn_m, array(array(3, 5), array(1, 1)))
+    select ML_PREDICT(mlflow_sklearn_m, array(x0, x1)) from tbl_X
     """)
 
     result.printSchema()
-    result.show(1, vertical=False, truncate=False)
+    result.show(10, vertical=False, truncate=False)
