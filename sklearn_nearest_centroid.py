@@ -23,7 +23,7 @@ with mlflow.start_run() as run:
     ####
     model.fit(X, y)
 
-    schema = "array<int>"
+    schema = "int"
     registered_model_name = f"{getpass.getuser()}_sklearn"
     rikai.mlflow.sklearn.log_model(
         model,
@@ -47,7 +47,7 @@ with mlflow.start_run() as run:
     spark.sql("show models").show(1, vertical=False, truncate=False)
 
     result = spark.sql(f"""
-    select ML_PREDICT(mlflow_sklearn_m, array(array(0.8, -1)))
+    select ML_PREDICT(mlflow_sklearn_m, array(0.8, -1))
     """)
 
     result.printSchema()
