@@ -49,6 +49,10 @@ annotations_df.show(1, vertical=True, truncate=False)
 images_df = spark \
     .createDataFrame(spark.sparkContext.parallelize(coco["images"])) \
     .withColumn(
+        "image_path",
+        concat(lit("data/coco_sample/train_sample/"), col("file_name"))
+    ) \
+    .withColumn(
         "image", 
         to_image(concat(lit("data/coco_sample/train_sample/"), col("file_name")))
     )

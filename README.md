@@ -21,10 +21,11 @@ only showing top 1 row
 
 ## Table of contents
 + coco_sample.py: prepare the coco_sample dataset
-+ coco_sample.ipynb: explore the coco_sample dataset in JupyterLab
-+ example_write.py: an example for rikai format writing
-+ resnet.py: create the pre-trained resnet model and then run ML_PREDICT
-+ resnet_mlflow.py: register the pre-trained resnet model and then create and then run ML_PREDICT
++ resnet_yaml.py: create resnet model via yaml
++ resnet_mlflow.py: create resnet model via mlflow
++ yolov5_mlflow.py: create yolov5 model via mlflow
 + sql_show_models.py: Example of `show models`
-+ yolov5_mlflow.py: register the pre-trained yolov5 model and then create and then run ML_PREDICT
++ coco_sample.ipynb: explore the coco_sample dataset in JupyterLab
++ yolov5.ipynb: Applying yolov5 on the coco_sample dataset
+
 

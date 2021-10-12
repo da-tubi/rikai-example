@@ -13,7 +13,7 @@ from example import spark
 
 mlflow_tracking_uri = "sqlite:///mlruns.db"
 mlflow.set_tracking_uri(mlflow_tracking_uri)
-registered_model_name = f"{getpass.getuser()}-yolov5s-model"
+registered_model_name = f"yolov5s-model"
 mlflow.set_experiment(registered_model_name)
 
 with mlflow.start_run():
