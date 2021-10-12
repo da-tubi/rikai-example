@@ -20,7 +20,8 @@ only showing top 1 row
 ```
 
 ## Table of contents
-+ coco.py: prepare the coco dataset
++ coco_sample.py: prepare the coco_sample dataset
++ coco_sample.ipynb: explore the coco_sample dataset in JupyterLab
 + example_write.py: an example for rikai format writing
 + resnet.py: create the pre-trained resnet model and then run ML_PREDICT
 + resnet_mlflow.py: register the pre-trained resnet model and then create and then run ML_PREDICT

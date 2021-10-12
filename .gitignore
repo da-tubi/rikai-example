@@ -8,3 +8,5 @@ __pycache__
 mlruns/
 mlruns.db
 *.pt
+.ipynb_checkpoints/
+data/

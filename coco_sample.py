@@ -6,7 +6,7 @@ from example import spark
 from rikai.spark.functions import to_image, box2d_from_top_left
 from pyspark.sql.functions import col, lit, concat, udf
 
-coco_sample_path = "../coco_sample"
+coco_sample_path = "data/coco_sample"
 
 # Download Coco Sample Dataset from Fast.ai datasets
 if not os.path.exists(coco_sample_path):
@@ -50,7 +50,7 @@ images_df = spark \
     .createDataFrame(spark.sparkContext.parallelize(coco["images"])) \
     .withColumn(
         "image", 
-        to_image(concat(lit("coco_sample/train_sample/"), col("file_name")))
+        to_image(concat(lit("data/coco_sample/train_sample/"), col("file_name")))
     )
 images_df = images_df.join(annotations_df, images_df.id == annotations_df.image_id) \
     .drop("annotations_df.image_id", "file_name", "id")
@@ -63,6 +63,6 @@ images_df.printSchema()
    .write
    .format("rikai")
    .mode("overwrite")
-   .save("/tmp/rikai_example/coco")
+   .save("/tmp/rikai_example/coco_sample")
 )
 
