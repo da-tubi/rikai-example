@@ -20,12 +20,16 @@ only showing top 1 row
 ```
 
 ## Table of contents
-+ coco_sample.py: prepare the coco_sample dataset
-+ resnet_yaml.py: create resnet model via yaml
-+ resnet_mlflow.py: create resnet model via mlflow
-+ yolov5_mlflow.py: create yolov5 model via mlflow
-+ sql_show_models.py: Example of `show models`
-+ coco_sample.ipynb: explore the coco_sample dataset in JupyterLab
-+ yolov5.ipynb: Applying yolov5 on the coco_sample dataset
+| Code | Description | Output |
+|---|---|---|
+| coco_sample.py   | prepare the coco_sample dataset | /tmp/rikai_example/coco_sample, /tmp/rikai_example/coco_labels |
+| resnet_yaml.py   |  create resnet model via yaml   | |
+| resnet_mlflow.py | create resnet model via mlflow  | |
+| yolov5_mlflow.py | create yolov5 model via mlflow  | |
+| yolov5_video.py  | prepare the dataset for the yolov5_video notebook | /tmp/rikai_example/yolov5_video |
+| sql_show_models.py | Example of `show models`      | |
+| coco_sample.ipynb |  explore the coco_sample dataset in JupyterLab | |
+| yolov5_mlflow.ipynb | Applying yolov5 on the coco_sample dataset | |
+| yolov5_video.ipynb  | Applying yolov5 on the Elephant Dream Video | |
 
 
