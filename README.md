@@ -7,7 +7,7 @@ Use `/tmp/rikai_example` as rikai warehouse, for `xyz.py`, save rikai formatted 
 $ conda create --no-default-packages -n rikai-example python=3.8 --yes
 $ conda activate rikai-example
 $ pip install -r requirements.txt
-$ python coco.py
+$ python coco_sample.py
 $ python
 >>> from example import spark
 >>> df = spark.read.format("rikai").load("/tmp/rikai_example/coco")
