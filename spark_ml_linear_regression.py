@@ -6,7 +6,8 @@ mlflow_tracking_uri = "sqlite:///mlruns.db"
 mlflow.set_tracking_uri(mlflow_tracking_uri)
 
 # enable autologging
-mlflow.spark.autolog()
+# don't know how to enable it for spark yet
+# mlflow.spark.autolog()
 
 # originally from https://spark.apache.org/docs/latest/ml-classification-regression.html#isotonic-regression
 
