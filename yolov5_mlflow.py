@@ -5,6 +5,9 @@ import pathlib
 
 import mlflow
 import rikai
+from rikai.types.vision import Image
+from pyspark.sql import Row
+import pickle
 import yolov5
 import torch
 from rikai.contrib.torch.transforms.yolov5 import OUTPUT_SCHEMA
@@ -25,7 +28,7 @@ with mlflow.start_run():
     if os.path.exists(pretrained):
         urllib.request.urlretrieve(url, pretrained)
     model = yolov5.load(pretrained)
-    pre = 'transform.yolov5.pre_processing'
+    pre = 'rikai.contrib.torch.transforms.yolov5.pre_processing'
     post = 'rikai.contrib.torch.transforms.yolov5.post_processing'
 
     # Rikai's logger adds output_schema, pre_pocessing, and post_processing as additional
@@ -59,9 +62,11 @@ with mlflow.start_run():
     spark.sql("show models").show(1, vertical=False, truncate=False)
 
     work_dir = pathlib.Path().absolute()
-    result = spark.sql(f"""
-    select ML_PREDICT(mlflow_yolov5_m, '{work_dir}/img/lena.png')
-    """)
+    np_img = Image(f"{work_dir}/img/lena.png").to_numpy()
+    df = spark.createDataFrame([
+        Row(a=1, b = pickle.dumps(np_img, protocol=0)),
+    ])
+    result = df.selectExpr('a', 'ML_PREDICT(mlflow_yolov5_m, b) as c')
 
     result.printSchema()
     result.show(1, vertical=False, truncate=False)
