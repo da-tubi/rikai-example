@@ -6,7 +6,7 @@ import numpy as np
 
 from rikai.types.vision import Image
 
-def load_video(spark, uri: str, limit = 400, ratio = 0.99) -> DataFrame:
+def load_video(spark, uri: str, limit = 1000, ratio = 0.99) -> DataFrame:
     cap = cv2.VideoCapture(uri)
 
     frame_id = 0
