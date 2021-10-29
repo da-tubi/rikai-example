@@ -45,7 +45,7 @@ def load_video(spark, uri: str, limit = 1000, ratio = 0.99) -> DataFrame:
     df = spark.createDataFrame(rows)
     return df
 
-df = load_video(spark, "elephants_dream.mp4", ratio=0.75)
+df = spark.read.format("video").load("elephants_dream.mp4")
 (
 df
     .repartition(4)
