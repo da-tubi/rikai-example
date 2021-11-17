@@ -8,6 +8,11 @@ import torch
 
 __all__ = ["pre_processing", "post_processing", "OUTPUT_SCHEMA"]
 
+'''
+The following code snippet comes from
+https://github.com/fcakyon/yolov5-pip/blob/4aaf354d8a7f66bb8baa4e5ba73e83b960d8f2d1/yolov5/models/common.py#L275-L344
+'''
+
 def _pre_process_func(image_data):
     image_size = 640
     img = Image(image_data).to_pil()
@@ -72,20 +77,6 @@ def post_processing(options: Dict[str, Any]) -> Callable:
                     predict_result["scores"].append(confs[x])
             results.append(predict_result)
         return results
-
-        # results = []
-        # for predicts in batch.pred:
-        #     predict_result = {
-        #         "boxes": [],
-        #         "label_ids": [],
-        #         "scores": [],
-        #     }
-        #     for *box, conf, cls in predicts.tolist():
-        #         predict_result["boxes"].append(box)
-        #         predict_result["label_ids"].append(cls)
-        #         predict_result["scores"].append(conf)
-        #     results.append(predict_result)
-        # return results
 
     return post_process_func
 
