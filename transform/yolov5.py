@@ -9,7 +9,6 @@ import torch
 __all__ = ["pre_processing", "post_processing", "OUTPUT_SCHEMA"]
 
 def _pre_process_func(image_data):
-    print(f"start _pre_process_func\n")
     image_size = 640
     img = Image(image_data).to_pil()
     n, imgs = (1, [img])  # number of images, list of images
@@ -29,8 +28,7 @@ def _pre_process_func(image_data):
     x = np.stack(x, 0) if n > 1 else x[0][None]  # stack
     x = np.ascontiguousarray(x.transpose((0, 3, 1, 2)))  # BHWC to BCHW
     x = torch.from_numpy(x).to("cpu").float() / 255.  # uint8 to fp16/32
-    print(f"end with {x.shape}\n")
-    return x
+    return x[0]
 
 
 def pre_processing(options: Dict[str, Any]) -> Callable:
@@ -49,15 +47,15 @@ def post_processing(options: Dict[str, Any]) -> Callable:
         y = non_max_suppression(y)  # NMS
 
         results = []
-        predict_result = {
-            "boxes": [],
-            "label_ids": [],
-            "scores": [],
-        }
 
         # img = input
         # im0 = cv2.resize(open_cv_image, (640, 384))
         for i, det in enumerate(y):
+            predict_result = {
+                "boxes": [],
+                "label_ids": [],
+                "scores": [],
+            }
             if det is not None and len(det):
                 confs = np.around(det[:, 4].detach().cpu().numpy(), 2)
                 # det[:, :4] = scale_coords(
@@ -72,7 +70,7 @@ def post_processing(options: Dict[str, Any]) -> Callable:
                     predict_result["boxes"].append(bb)
                     predict_result["label_ids"].append(0)
                     predict_result["scores"].append(confs[x])
-        results.append(predict_result)
+            results.append(predict_result)
         return results
 
         # results = []
