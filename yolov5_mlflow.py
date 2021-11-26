@@ -26,7 +26,7 @@ with mlflow.start_run():
         urllib.request.urlretrieve(url, pretrained)
     model = yolov5.load(pretrained)
     pre = 'transform.yolov5.pre_processing'
-    post = 'transforms.yolov5.post_processing'
+    post = 'transform.yolov5.post_processing'
 
     # Rikai's logger adds output_schema, pre_pocessing, and post_processing as additional
     # arguments and automatically adds the flavor / rikai model spec version
