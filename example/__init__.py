@@ -44,5 +44,5 @@ def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
     init(session)
     return session
 
-spark = init_spark_session(rikai_version='0.0.12')
+spark = init_spark_session(rikai_version='0.0.16')
 

@@ -19,6 +19,9 @@ $ python
 only showing top 1 row
 ```
 
+Install [spark-video](https://github.com/eto-ai/spark-video) via PySpark REPL.
+
+
 ## Table of contents
 | Code | Description | Output |
 |---|---|---|
