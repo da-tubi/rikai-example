@@ -1,5 +1,4 @@
 from rikai.spark.utils import get_default_jar_version 
-from rikai.spark.sql import init
 
 def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
     from pyspark.sql import SparkSession
@@ -41,8 +40,7 @@ def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
     for k, v in conf.items():
         builder = builder.config(k, v)
     session = builder.master("local[2]").getOrCreate()
-    init(session)
     return session
 
-spark = init_spark_session(rikai_version='0.0.16')
+spark = init_spark_session(rikai_version='0.0.18')
 
