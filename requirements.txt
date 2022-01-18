@@ -1,4 +1,5 @@
 ipython==7.28.0
 mlflow==1.16.0
-rikai==0.0.20
+rikai==0.0.21
 rikai-torchhub==0.0.1
+rikai-yolov5==0.0.4
