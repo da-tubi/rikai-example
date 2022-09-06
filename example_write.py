@@ -1,8 +1,9 @@
-from pyspark.sql import Row
-from pyspark.ml.linalg import DenseMatrix
-from rikai.types import Image, Box2d
-from rikai.numpy import wrap
 import numpy as np
+from pyspark.ml.linalg import DenseMatrix
+from pyspark.sql import Row
+from rikai.numpy import wrap
+from rikai.types import Box2d, Image
+
 from example import spark
 
 df = spark.createDataFrame(
@@ -24,4 +25,6 @@ df = spark.createDataFrame(
 
 df.write.format("rikai").save("/tmp/rikai_example/example_write")
 
-spark.sql("select * from parquet.`/tmp/rikai_example/example_write`").show(1, vertical=True, truncate=False)
+spark.sql("select * from parquet.`/tmp/rikai_example/example_write`").show(
+    1, vertical=True, truncate=False
+)

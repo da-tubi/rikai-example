@@ -1,0 +1,27 @@
+[GLOBAL]
+pants_version = "2.12.1"
+
+backend_packages.add = [
+  "pants.backend.python",
+  "pants.backend.python.lint.docformatter",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.flake8",
+  "pants.backend.python.lint.isort",
+]
+
+[source]
+root_patterns = ["/"]
+
+[python]
+interpreter_constraints = ["==3.8.*"]
+enable_resolves = true
+
+[python.resolves]
+  rikai_latest = "3rdparty/rikai_latest.lock"
+
+[python-bootstrap]
+search_path = ["<PATH>", "<PYENV>"]
+
+[test]
+output = "all"
+

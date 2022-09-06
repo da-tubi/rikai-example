@@ -1,0 +1,13 @@
+python_requirement(
+    name="rikai_0.1.13",
+    requirements=["rikai==0.1.13"],
+    resolve="rikai_latest",
+)
+
+python_sources(
+    name=f"sources",
+    sources=["*.py", "example/__init__.py"],
+    resolve="rikai_latest",
+)
+
+pex_binary(name="coco_sample", entry_point="coco_sample.py", resolve="rikai_latest")

@@ -1,4 +1,5 @@
-from rikai.spark.utils import get_default_jar_version 
+from rikai.spark.utils import get_default_jar_version
+
 
 def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
     from pyspark.sql import SparkSession
@@ -27,14 +28,8 @@ def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
             "spark.executor.extraJavaOptions",
             "-Dio.netty.tryReflectionSetAccessible=true",
         )
-        .config(
-            "spark.driver.memory",
-	    "4g"
-        )
-        .config(
-            "spark.executor.memory",
-            "4g"
-        )
+        .config("spark.driver.memory", "4g")
+        .config("spark.executor.memory", "4g")
     )
     conf = conf or {}
     for k, v in conf.items():
@@ -42,5 +37,5 @@ def init_spark_session(conf=None, app_name="rikai", rikai_version=None):
     session = builder.master("local[2]").getOrCreate()
     return session
 
-spark = init_spark_session(rikai_version='0.0.18')
 
+spark = init_spark_session(rikai_version="0.0.18")

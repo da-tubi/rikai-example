@@ -11,3 +11,5 @@ mlruns.db
 .ipynb_checkpoints/
 data/
 .bsp/
+.pants.d/
+.pids

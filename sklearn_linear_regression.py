@@ -1,8 +1,10 @@
-from sklearn.linear_model import LinearRegression
+import getpass
+
 import mlflow
 import numpy as np
-import getpass
 import rikai
+from sklearn.linear_model import LinearRegression
+
 from example import spark
 
 mlflow_tracking_uri = "sqlite:///mlruns.db"
@@ -17,7 +19,7 @@ y = np.dot(X, np.array([1, 2])) + 3
 
 # prepare evaluation data
 X_eval = np.array([[3, 3], [3, 4]])
-y_eval = np.dot(X_eval, np.array([1,2])) + 3
+y_eval = np.dot(X_eval, np.array([1, 2])) + 3
 
 # train a model
 model = LinearRegression()
@@ -31,20 +33,19 @@ with mlflow.start_run() as run:
     schema = "float"
     registered_model_name = f"{getpass.getuser()}_sklearn_lr"
     rikai.mlflow.sklearn.log_model(
-        model,
-        "model",
-        schema,
-        registered_model_name = registered_model_name)
-
+        model, "model", schema, registered_model_name=registered_model_name
+    )
 
     ####
     # Part 2: create the model using the registered MLflow uri
     ####
     spark.conf.set("spark.sql.execution.arrow.pyspark.enabled", "false")
     spark.conf.set("rikai.sql.ml.registry.mlflow.tracking_uri", mlflow_tracking_uri)
-    spark.sql(f"""
+    spark.sql(
+        f"""
     CREATE MODEL mlflow_sklearn_m USING 'mlflow:///{registered_model_name}';
-    """)
+    """
+    )
 
     ####
     # Part 3: predict using the registered Rikai model
@@ -54,9 +55,11 @@ with mlflow.start_run() as run:
     df = spark.range(100).selectExpr("id as x0", "id+1 as x1")
     df.createOrReplaceTempView("tbl_X")
 
-    result = spark.sql(f"""
+    result = spark.sql(
+        f"""
     select ML_PREDICT(mlflow_sklearn_m, array(x0, x1)) from tbl_X
-    """)
+    """
+    )
 
     result.printSchema()
     result.show(10, vertical=False, truncate=False)
