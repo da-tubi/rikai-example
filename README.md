@@ -1,3 +1,10 @@
+# Rikai Examples 2
+Just find a better way to manage jupyter notebooks. This repo is archived now! Please see
+
+https://github.com/da-tubi/rikai-example2
+
+
+
 # Rikai Examples
 ## Convention
 Use `/tmp/rikai_example` as rikai warehouse, for `xyz.py`, save rikai formatted data into `/tmp/rikai_example/{xyz}[optional]`.
